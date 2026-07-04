@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-cream text-ink font-sans;
+  }
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface border border-bdr rounded-xl shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-pine-400 focus-visible:ring-offset-2
+      disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-pine-600 text-white hover:bg-pine-700 active:bg-pine-800;
+  }
+  .btn-secondary {
+    @apply btn bg-surface text-ink border border-bdr hover:bg-sand active:bg-linen;
+  }
+  .btn-ember {
+    @apply btn bg-ember-500 text-white hover:bg-ember-600 active:bg-ember-700;
+  }
+  .btn-ghost {
+    @apply btn text-soot hover:bg-sand;
+  }
+  .btn-md {
+    @apply px-4 py-2 text-sm;
+  }
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  .input {
+    @apply w-full rounded-lg border border-bdr bg-surface px-3 py-2 text-sm text-ink
+      placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-pine-400 focus:border-pine-400;
+  }
+  .label {
+    @apply block text-sm font-medium text-soot mb-1.5;
+  }
+  .section-title {
+    @apply text-lg font-semibold text-ink;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+  .table-base {
+    @apply w-full text-sm text-left;
+  }
+  .table-base th {
+    @apply px-3 py-2 font-semibold text-soot bg-sand/70 first:rounded-l-lg last:rounded-r-lg whitespace-nowrap;
+  }
+  .table-base td {
+    @apply px-3 py-2.5 border-b border-bdr/70 align-top;
+  }
+}
+
+/* print styles: turn the plan page into a clean printable manual */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-block {
+    display: block !important;
+  }
+  body {
+    background: white !important;
+  }
+  .card {
+    box-shadow: none !important;
+    border-color: #ddd !important;
+    break-inside: avoid;
+  }
+  a[href]::after {
+    content: "";
+  }
+}
