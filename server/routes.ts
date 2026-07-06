@@ -40,6 +40,7 @@ import { runFeasibilityQuestionAgent } from "./ai/agents/feasibilityQuestionAgen
 import { runSafetyAgent } from "./ai/agents/safetyAgent";
 import { advisorChat, troubleshoot } from "./ai/advisor";
 import { builderHandoffMarkdown, planToMarkdown, storeCutSheetMarkdown } from "./exports/markdown";
+import { simpleChecklistMarkdown } from "./ai/composeSimplePlan";
 import { shoppingListCsv } from "./exports/csv";
 
 /* ------------------------------- utilities ------------------------------- */
@@ -575,6 +576,19 @@ export function registerRoutes(app: Express): void {
     const plan = requireLatestPlan(project, res);
     if (!plan) return;
     sendDownload(res, `${sanitizeFilename(plan.title) || "build-plan"}.md`, "text/markdown", planToMarkdown(project, plan));
+  }));
+
+  app.get("/api/projects/:id/export/checklist.md", h((req, res) => {
+    const project = requireProject(req, res);
+    if (!project) return;
+    const plan = requireLatestPlan(project, res);
+    if (!plan) return;
+    sendDownload(
+      res,
+      `${sanitizeFilename(plan.title) || "build-plan"}-checklist.md`,
+      "text/markdown",
+      simpleChecklistMarkdown(project, plan)
+    );
   }));
 
   app.get("/api/projects/:id/export/store-cut-sheet.md", h((req, res) => {
