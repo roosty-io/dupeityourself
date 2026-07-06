@@ -4,7 +4,7 @@ import type { ProjectWithPlan } from "@shared/types";
 import { api } from "@/lib/api";
 import { PageSpinner } from "@/components/ui/Spinner";
 import { ErrorState } from "@/components/ui/EmptyState";
-import { ExportCenter } from "@/components/plan/ExportCenter";
+import { ExportDocumentCards } from "@/components/plan/ExportDocumentCards";
 
 export default function ExportCenterPage() {
   const { id = "" } = useParams<{ id: string }>();
@@ -52,7 +52,12 @@ export default function ExportCenterPage() {
       </div>
 
       {plan ? (
-        <ExportCenter projectId={project.id} planTitle={plan.title} hasCutSheet={Boolean(plan.storeCutSheet)} />
+        <ExportDocumentCards
+          projectId={project.id}
+          planTitle={plan.title}
+          hasCutSheet={Boolean(plan.storeCutSheet)}
+          onPrint={() => window.print()}
+        />
       ) : (
         <ErrorState message="This project doesn't have a generated plan yet — generate one first, then come back to export it." />
       )}

@@ -34,3 +34,15 @@ export function planQualityLabel(score: number): string {
 export function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
+
+/** Compact time headline — the part before a parenthetical (e.g. "3 weekends"). */
+export function shortTime(text: string): string {
+  const i = text.indexOf(" (");
+  return (i > 0 ? text.slice(0, i) : text).trim();
+}
+
+/** The parenthetical time detail, if any (e.g. "28-34 hours hands-on, plus cure time"). */
+export function timeDetail(text: string): string | undefined {
+  const m = text.match(/\(([^)]+)\)/);
+  return m ? m[1] : undefined;
+}

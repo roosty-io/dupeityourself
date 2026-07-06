@@ -99,6 +99,7 @@ export const api = {
   /* ------------------------------- exports ------------------------------ */
   exportUrls: (id: string) => ({
     csv: `/api/projects/${id}/export/csv`,
+    checklist: `/api/projects/${id}/export/checklist.md`,
     planMarkdown: `/api/projects/${id}/export/plan.md`,
     storeCutSheet: `/api/projects/${id}/export/store-cut-sheet.md`,
     builderHandoff: `/api/projects/${id}/export/builder-handoff.md`,
